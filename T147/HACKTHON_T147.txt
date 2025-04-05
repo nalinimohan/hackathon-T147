@@ -1,0 +1,65 @@
+HACKTHON_T147:
+B.NaliniMohanrao(2303A51659)
+CH.Harish Rao(2303A51661)
+G.srija Reddy(2303A51671)
+K.sanath kumar(2303A51698)
+L.anvitha reddy(2303A51631)
+
+
+
+CODE:
+
+from flask import Flask, request, jsonify
+import nltk
+from nltk.chat.util import Chat, reflections
+
+app = Flask(__name__)
+
+# Sample pairs for the chatbot
+pairs = [
+    [
+        r"my name is (.*)",
+        ["Hello %1, how can I assist you today?"]
+    ],
+    [
+        r"what is the admission process?",
+        ["The admission process involves filling out an application form, submitting required documents, and attending counseling sessions."]
+    ],
+    [
+        r"what are the eligibility criteria?",
+        ["Eligibility criteria vary by course. Generally, you need to have completed your 10+2 with relevant subjects."]
+    ],
+    [
+        r"what about scholarships?",
+        ["There are various scholarships available based on merit and financial need. You can check the official website for more details."]
+    ],
+    [
+        r"quit",
+        ["Thank you for your inquiry. Have a great day!"]
+    ],
+]
+
+chatbot = Chat(pairs, reflections)
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    user_input = request.json.get("message")
+    response = chatbot.respond(user_input)
+    return jsonify({"response": response})
+
+if __name__ == "__main__":
+    app.run(debug=True)
+OUTPUT:
+PS C:\Users\Nalini Mohanrao\Downloads\simple ai chatbot>  & 'c:\Users\Nalini Mohanrao\AppData\Local\Programs\Python\Python311\python.exe' 'c:\Users\Nalini Mohanrao\.vscode\extensions\ms-python.debugpy-2025.4.1-win32-x64\bundled\libs\debugpy\launcher' '62478' '--' 'C:\Users\Nalini Mohanrao\Downloads\k.py' 
+DTE Rajasthan Chatbot Assistant
+Type 'quit' to exit or 'analytics' to see usage statistics
+
+You: admissions
+
+Bot: The admission process involves: 1. Online registration 2. Document verification 3. Choice filling 4. Seat allocation Candidates must have passed 10+2 with Physics, Chemistry, and Mathematics with minimum 45% marks Required documents: 1. Class 10 marksheet 2. Class 12 marksheet 3. Domicile certificate 4. Category certificate (if applicable)
+
+You: hi
+
+Bot: I apologize, but I don't have specific information about that. Please try asking about admissions, scholarships, or colleges.
+
+You:
